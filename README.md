@@ -1,5 +1,5 @@
 # mk-lab-terraform-packet
-Use Terraform to deploy Mk22 on packet.net
+Use Terraform to deploy Mk22 on the bare-metal provider packet.net
 
 ##### Steps
 
