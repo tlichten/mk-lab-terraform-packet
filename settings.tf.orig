@@ -1,0 +1,24 @@
+variable "packet_api_key" {
+	description = "get your packet api key at https://app.packet.net/portal#/api-keys"
+  default = "SET_YOUR_KEY_HERE"
+}
+
+variable "packet_machine_type" {
+	description = "set to the required machine type, for example baremetal_1 or baremetal_3. See Packet.net for more details"
+	default = "baremetal_0"
+}
+
+variable "packet_location" {
+	description = "Pick from available Packet.net data center locations: ewr1==New York, sjc1==San Jose,CA, ams1==Amsterdam"
+	default = "ams1"
+}
+
+variable "cluster_domain" {
+	description = "Hostname for packet and machine"
+	default = "mk22-lab-basic.local"
+}
+
+variable "ssh_private_key" {
+	description = "location of ssh private key that matches the public key you gave to packet"
+	default = "~/.ssh/id_rsa"
+}
