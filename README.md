@@ -14,10 +14,16 @@ Use Terraform to deploy Mk22 lab on the bare-metal provider packet.net
 ```bash
 (~/mk-lab-terraform-packet) $ terraform apply .
 ```
-- After deploy, the public IP of the Salt master cfg01 will be displayed
+- Deployment can take about 90 minutes. After deploy, the public IP of the Salt master cfg01 will be displayed
 - Login
 ```bash
 (~/mk-lab-terraform-packet) $ ssh root@<PUBLIC-IP>
+```
+- Horizon is available at `https://172.16.10.100`  user admin, password workshop
+- Contrail is avaiable at `https://172.16.10.254:8143`  user admin, password workshop, domain admin
+- Use a tool like [sshuttle](https://github.com/apenwarr/sshuttle) as poor man's VPN into the lab:
+```bash
+(~/mk-lab-terraform-packet) $  sshuttle -v -r root@<PUBLIC-IP> 192.168.150.0/24 172.16.10.0/24
 ```
 - **Important:** When done delete resources to save unnecessary costs:
 ```bash
