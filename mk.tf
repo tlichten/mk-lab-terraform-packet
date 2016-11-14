@@ -187,9 +187,10 @@ output "ip_addresses" {
     value = "${packet_device.cfg01.network.0.address}"
 }
 
-output "steps" {
+output "Next_Steps" {
     value = [
       "ssh root@${packet_device.cfg01.network.0.address}",
-      "ssh cirros@192.168.150.6"
+      "salt 'ctl01*' cmd.run '. /root/keystonerc; nova list'",
+      "ssh cirros@<floating-ip>  #password cubswin:)"
     ]
 }
