@@ -26,5 +26,5 @@ Use Terraform to deploy Mk22 lab on the bare-metal provider packet.net
 - Verify no servers are still running at packet.net
 
 ##### Credits
-- [Sam's blog](http://samos-it.com/posts/openstack-salt-mk22-vagrant-lab.html) for illustrating use Mk22 lab with Vagrant
+- [Sam's blog](http://samos-it.com/posts/openstack-salt-mk22-vagrant-lab.html) for illustrating how to use Mk22 lab with Vagrant
 - [Sebastian's blog](http://www.yet.org/2016/10/os-salt/) for detailed guide and intro to Salt, reclass, and Salt OpenStack
