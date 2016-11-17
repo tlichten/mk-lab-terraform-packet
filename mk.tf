@@ -41,11 +41,9 @@ resource "packet_device" "cfg01" {
           inline = [
             "export ubuntu_release='xenial'",
             "export private_ip_address=''",
-            "export admin_ip_address='172.16.10.100'",
             "/bin/bash weave.sh"
           ]
         }
-
 }
 
 resource "null_resource" "cfg01_master_provision" {
@@ -75,6 +73,18 @@ resource "null_resource" "cfg01_master_provision" {
             "/bin/bash master.sh"
           ]
         }
+
+        provisioner "file" {
+            source = "templates/setipaddress.sh"
+            destination = "/root/setipaddress.sh"
+        }
+
+        # Set up ip address for interface  weave
+        provisioner "remote-exec" {
+          inline = [
+            "/bin/bash setipaddress.sh"
+          ]
+        }
 }
 
 variable "nodes" {
@@ -85,17 +95,6 @@ variable "nodes" {
     "3" = "cmp01"
     "4" = "mon01"
     "5" = "prx01"
-  }
-}
-
-variable "node_hostip" {
-  default = {
-    "0" = "101"
-    "1" = "102"
-    "2" = "103"
-    "3" = "105"
-    "4" = "107"
-    "5" = "121"
   }
 }
 
@@ -128,7 +127,6 @@ resource "packet_device" "node" {
           inline = [
             "export ubuntu_release='trusty'",
             "export private_ip_address='${packet_device.cfg01.network.2.address}'",
-            "export admin_ip_address='172.16.10.${lookup(var.node_hostip, count.index)}'",
             "/bin/bash weave.sh"
           ]
         }
@@ -159,6 +157,18 @@ resource "packet_device" "node" {
           ]
         }
 
+        provisioner "file" {
+            source = "templates/setipaddress.sh"
+            destination = "/root/setipaddress.sh"
+        }
+
+        # Set up ip address for interface  weave
+        provisioner "remote-exec" {
+          inline = [
+            "/bin/bash setipaddress.sh"
+          ]
+        }
+
 }
 
 
@@ -183,11 +193,11 @@ resource "null_resource" "bootstrap" {
         }
 }
 
-output "ip_addresses" {
+output "salt_master" {
     value = "${packet_device.cfg01.network.0.address}"
 }
 
-output "Next_Steps" {
+output "steps" {
     value = [
       "ssh root@${packet_device.cfg01.network.0.address}",
       "salt 'ctl01*' cmd.run '. /root/keystonerc; nova list'",

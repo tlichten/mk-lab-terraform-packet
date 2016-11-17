@@ -17,4 +17,3 @@ echo "Installing Weave ..."
 curl -L git.io/weave -o /usr/local/bin/weave
 chmod a+x /usr/local/bin/weave
 weave launch ${private_ip_address} --ipalloc-range 172.16.10.0/24
-ip addr a ${admin_ip_address}/24 dev weave

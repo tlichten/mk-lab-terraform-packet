@@ -1,0 +1,10 @@
+id_rsa
+id_rsa.pub
+keys/*.pem
+keys/*.pub
+variables.tf
+*.tfstate
+*.tfstate.backup
+.DS_Store
+passwords.tf
+settings.tf
